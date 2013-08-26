@@ -1,0 +1,9 @@
+Author: Nick Caley
+Class: EECS3150
+Date: 09/25/2012
+
+gcc eecs3150.01.transmitter.c -o tranmitter
+gcc eecs3150.01.receiver.c -o receiver
+
+run the transmitter - it expects testInput.txt to exist in the same directory - it will create testOutput.txt in the same directory
+then run the receiver - it expects testOutput.txt to exist in the same directory

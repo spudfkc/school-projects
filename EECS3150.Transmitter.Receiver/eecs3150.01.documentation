@@ -1,0 +1,307 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="LibreOffice 3.5  (Linux)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGED" CONTENT="20121011;13263800">
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P>EECS 3150 
+</P>
+<P>Data Communications 
+</P>
+<P>Assignment 01 
+</P>
+<P>Milestone 1</P>
+<P>Author: Nick Caley 
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P>Table of Contents</P>
+<OL>
+	<LI><P>System Documentation</P>
+	<OL>
+		<LI><P>System Data Flow</P>
+		<LI><P>Transmitter Data Flow</P>
+		<LI><P>Receiver Data Flow</P>
+		<LI><P>Routines</P>
+		<LI><P>Data Structures</P>
+		<LI><P>Implementation Details</P>
+	</OL>
+	<LI><P>Test Documentation</P>
+	<OL>
+		<LI><P>Author Tests</P>
+	</OL>
+	<LI><P>User Documentation</P>
+	<OL>
+		<LI><P>Source</P>
+		<LI><P>Run</P>
+	</OL>
+</OL>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<OL>
+	<LI><P>System Documentation</P>
+	<OL>
+		<LI><P>System Data Flow</P>
+	</OL>
+</OL>
+<P><IMG SRC="eecs3150.01_documentation_5edd05c9.gif" NAME="Object1" ALIGN=RIGHT WIDTH=791 HEIGHT=487><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<OL>
+	<OL>
+		<LI><P>Transmitter Data Flow</P>
+		<OL TYPE=a>
+			<P STYLE="margin-bottom: 0in"><IMG SRC="eecs3150.01_documentation_4b36f677.gif" NAME="Object2" ALIGN=LEFT WIDTH=800 HEIGHT=487></P>
+		</OL>
+		<LI><P>Receiver Data Flow</P>
+		<OL TYPE=a>
+			<P STYLE="margin-bottom: 0in"><IMG SRC="eecs3150.01_documentation_15276d89.gif" NAME="Object3" ALIGN=LEFT WIDTH=797 HEIGHT=490></P>
+		</OL>
+		<LI><P>Routines</P>
+		<OL TYPE=a>
+			<LI><P>Transmitter</P>
+			<UL>
+				<LI><P>void toggleBit(char *, int) 
+				</P>
+				<UL>
+					<LI><P>Toggles the bit in char* at place int</P>
+				</UL>
+				<LI><P>char unsetBit(char *, int) 
+				</P>
+				<UL>
+					<LI><P>Unsets the bit in a byte at a specific place (the bit at
+					that place will be 0). Then returns the new byte.</P>
+				</UL>
+				<LI><P>char setBit(char *, int)</P>
+				<UL>
+					<LI><P>Sets the bit in a byte at the place given by the int.
+					Then returns the new byte.</P>
+				</UL>
+				<LI><P>int checkBit(char *, int) 
+				</P>
+				<UL>
+					<LI><P>Checks to see if the bit in the byte is a 1 or a 0. Will
+					return 1 if it is a 1, or 0 if it is 0.</P>
+				</UL>
+				<LI><P>void calcParityEven(char *) 
+				</P>
+				<UL>
+					<LI><P>Calculates even parity for a byte and sets that byte to a
+					new byte with the most significant bit set to the parity bit.</P>
+				</UL>
+				<LI><P>void calcParityEvenForString(char *)</P>
+				<UL>
+					<LI><P>Iterates through a string and sets the parity bit for
+					each byte. This assumes the bytes is the string are 7-bit ASCII.</P>
+				</UL>
+				<LI><P>size_t writeFile(char <SPAN STYLE="font-weight: normal">*,
+				char *)</SPAN></P>
+				<UL>
+					<LI><P STYLE="font-weight: normal">Takes a buffer of chars and a
+					filepath. This will then write out the buffer to the file given
+					by filepath (will create the file if it does not exist already).
+					Returns a size_t which is the number of bytes written.</P>
+				</UL>
+				<LI><P STYLE="font-weight: normal">char * readFile(int, int, char
+				*)</P>
+				<UL>
+					<LI><P STYLE="font-weight: normal">This takes an offset, a
+					length to read, and the filepath. It will read n number of bits
+					(given by length) starting at the offset. This returns a string
+					of the bytes read.</P>
+				</UL>
+				<LI><P STYLE="font-weight: normal">struct frame createFrame(char
+				*, int) 
+				</P>
+				<UL>
+					<LI><P STYLE="font-weight: normal">Creates a frame stuct with
+					the given data and length. Returns a frame struct with the
+					control bytes, length byte, and data bytes set.</P>
+				</UL>
+				<LI><P STYLE="font-weight: normal">struct frameWrap
+				createFrameWrap(char *, int)</P>
+				<UL>
+					<LI><P STYLE="font-weight: normal">Similar to createFrame, but
+					creates a wrapper around the frame which is essentially a linked
+					list node with the data being a frame struct. Returns a
+					frameWrap struct with the frame inside created.</P>
+				</UL>
+				<LI><P STYLE="font-weight: normal">void transmitFrame(struct
+				frame *, char *)</P>
+				<UL>
+					<LI><P STYLE="font-weight: normal">Transmits the given frame
+					struct to the given file.</P>
+				</UL>
+				<LI><P STYLE="font-weight: normal">int transmitFrameList(struct
+				frameWrap, char *)</P>
+				<UL>
+					<LI><P STYLE="font-weight: normal">Transmits the given list of
+					frameWraps to the given file. Basically traverses the linked
+					list of frameWraps and transmits each frame.</P>
+				</UL>
+			</UL>
+			<LI><P STYLE="font-weight: normal">Receiver</P>
+			<UL>
+				<LI><P STYLE="font-weight: normal">struct frame
+				reconstructFrame(char, char *)</P>
+				<UL>
+					<LI><P STYLE="font-weight: normal">Creates and returns a new
+					frame struct with the given length and data string.</P>
+				</UL>
+				<LI><P STYLE="font-weight: normal">Struct frame *
+				receiveData(char *)</P>
+				<UL>
+					<LI><P STYLE="font-weight: normal">Receives the data/frames from
+					the given file and prints the contents to stdout.</P>
+				</UL>
+			</UL>
+		</OL>
+		<LI><P STYLE="font-weight: normal">Data Structures</P>
+		<OL TYPE=a>
+			<LI><P STYLE="font-weight: normal">Transmitter</P>
+			<UL>
+				<LI><P STYLE="font-weight: normal">struct frame</P>
+				<UL>
+					<LI><P STYLE="font-weight: normal">Holds the frame data: Control
+					characters, length, and data string.</P>
+				</UL>
+				<LI><P STYLE="font-weight: normal">struct frameWrap</P>
+				<UL>
+					<LI><P STYLE="font-weight: normal">Is a linked list node that
+					holds the frame data and a pointer to another frameWrap struct
+					or null.</P>
+				</UL>
+			</UL>
+			<LI><P STYLE="font-weight: normal">Receiver</P>
+			<UL>
+				<LI><P STYLE="font-weight: normal">struct frame</P>
+				<UL>
+					<LI><P STYLE="font-weight: normal">A linked list node that has
+					both the data string and length as well as a pointer to the next
+					frame or null. Similar to a combination of the frame and
+					frameWrap in the transmitter.</P>
+				</UL>
+			</UL>
+		</OL>
+		<LI><P>Implementation Details</P>
+		<OL TYPE=a>
+			<LI><P STYLE="margin-bottom: 0in">The transmitter will take an
+			input file and read the input file into a series of frameWraps.
+			Each frameWrap points to the next frameWrap (or null if there is
+			none) and contains the actual frame to be transmitted. 
+			</P>
+			<LI><P STYLE="margin-bottom: 0in">The receiver works very similar
+			to the transmitter when receiving. It receives the data and
+			reconstructs the frames as it receives it into a linked list.</P>
+		</OL>
+	</OL>
+	<LI><P>Test Documentation</P>
+	<OL>
+		<LI><P>Author Tests</P>
+		<OL TYPE=a>
+			<LI><P>Version of gcc</P>
+			<UL>
+				<LI><P>gcc-4.6.real (Ubuntu/Linaro 4.6.3-1ubuntu5) 4.6.3</P>
+			</UL>
+			<LI><P>Test data</P>
+			<UL>
+				<LI><P>TestInput.txt</P>
+				<UL>
+					<LI><P>This is the test input text. It contains just a paragraph
+					of sample text.</P>
+				</UL>
+				<LI><P>TestOutput.txt</P>
+				<UL>
+					<LI><P>This is the encoded input. Containing the parity bits on
+					each data byte and the control and length bytes.</P>
+				</UL>
+			</UL>
+		</OL>
+	</OL>
+	<LI><P>User Documentation</P>
+	<OL>
+		<LI><P>Where is the Source?</P>
+		<OL TYPE=a>
+			<LI><P>The source is located in the src/ directory. The
+			transmitter is located in src/transmitter/, while the receiver is
+			located in src/receiver/.</P>
+		</OL>
+		<LI><P>How to Run the Program?</P>
+		<OL TYPE=a>
+			<LI><P>To compile</P>
+			<UL>
+				<LI><P>in the bin/ directory, there is a bash script named
+				compile.sh. Run this and it will compile the source and output
+				two executables in your current directory. The executables are
+				named transmitter and receiver and are the transmitter and
+				receiver respectively.</P>
+			</UL>
+			<LI><P>To run transmitter</P>
+			<UL>
+				<LI><P>Execute the transmitter with -i and -o parameters.</P>
+				<LI><P>The -i should be followed by the input file to be encoded
+				and transmitted.</P>
+				<LI><P>The -o should be followed by the output file that was
+				transmitted.</P>
+			</UL>
+			<LI><P>To run receiver</P>
+			<UL>
+				<LI><P>Execute the receiver with the -i parameter.</P>
+				<LI><P>The -i should be followed by the encoded input file.</P>
+			</UL>
+		</OL>
+	</OL>
+</OL>
+</BODY>
+</HTML>

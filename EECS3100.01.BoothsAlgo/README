@@ -1,0 +1,10 @@
+Author: Nick Caley
+Class: EECS3100 - Microsystems Design
+Lab 01 - Booth's Algorithm
+
+Performs multiplication of two words using only shifts and add/sub.
+
+The product will be held in AX:DX - the result printed to the screen will only show correctly in decimal format when the product can be contained within a word. 
+
+It still does the multiplication, but it just shows incorrectly on the screen if the product is larger than a word.
+

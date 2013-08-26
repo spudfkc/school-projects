@@ -1,0 +1,8 @@
+
+/Debug
+
+.*
+*.o
+*.d
+!.gitignore
+
